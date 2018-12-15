@@ -2,7 +2,7 @@ const BASE_URL = "http://whispering-atoll-52291.herokuapp.com";
 var BOARD_ID = null;
 
 $(document).ready(function(){
-	var buildTableHTML = function(rows, cols) {
+	var buildTableHTML = function(rows, cols, cells) {
 		var range_rows = [...Array(rows).keys()];
 		var range_cols = [...Array(cols).keys()];
 
@@ -10,13 +10,18 @@ $(document).ready(function(){
 		$.each(range_rows,function(i, x){
 		 rowHtml += '<tr>';
 		 $.each(range_cols, function(j, y){
-				rowHtml+='<td>' + '?' + '</td>';
+			 	var cell = cells[i*cols + j]
+				if(cell.seen) {
+					rowHtml+='<td class=clicked>' + cell.content + '</td>';
+				}
+				else {
+					rowHtml+='<td>' + '?' + '</td>';
+				}
 		 });
 		 rowHtml += '</tr>';
 	 });
 
 		return rowHtml;
-		console.log(rowHtml);
 	};
 
 	var startGame = function(successCallback, errorCallback) {
@@ -38,8 +43,13 @@ $(document).ready(function(){
   };
 
 	$('#start-btn').on('click', function(){
-		var callback = function(){
-			var tableContentHtml = buildTableHTML(15, 15);
+		var callback = function(response){
+			var cells = response.cells;
+			var rows = response.rows;
+			var cols = response.cols;
+			boardID = response.id;
+
+			var tableContentHtml = buildTableHTML(rows, cols, cells);
 			$('#table').html(tableContentHtml);
 			$('#start-btn').html("Restart");
 			$('#status').html("Game Ongoing");
