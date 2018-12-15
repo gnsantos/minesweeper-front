@@ -1,4 +1,4 @@
-const BASE_URL = "http://whispering-atoll-52291.herokuapp.com";
+const BASE_URL = "https://whispering-atoll-52291.herokuapp.com";
 var BOARD_ID = null;
 
 $(document).ready(function(){
@@ -92,7 +92,6 @@ $(document).ready(function(){
 		var rowIndex = $(this).parent().parent().children().index($(this).parent());
 
 		var successCallback = function(response){
-			console.log(response);
 			var cells = response.cells;
 			var rows = response.rows;
 			var cols = response.cols;
@@ -107,7 +106,6 @@ $(document).ready(function(){
 		};
 
 		var errorCallback = function(resp){
-			console.log(resp);
 			alert('Invalid Move!');
 		};
 
