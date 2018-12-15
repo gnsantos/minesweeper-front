@@ -4,3 +4,11 @@ td {border: 1px #DDD solid; padding: 5px; cursor: pointer; background-color: #85
   background-color: white;
   color: black;
 }
+
+.bombs {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 150px;
+  color: red;
+}

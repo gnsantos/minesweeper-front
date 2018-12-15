@@ -73,6 +73,7 @@ $(document).ready(function(){
 			var cells = response.cells;
 			var rows = response.rows;
 			var cols = response.cols;
+			var nbombs = response.bombs;
 
 			BOARD_ID = response.id;
 
@@ -80,6 +81,7 @@ $(document).ready(function(){
 			$('#table').html(tableContentHtml);
 			$('#start-btn').html("Restart");
 			$('#status').html("Game Ongoing");
+			$('#bombs').html(nbombs);
 		}
 
 		startGame(callback, function(){alert('error')})
